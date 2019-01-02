@@ -13,7 +13,7 @@ client = InfluxDBClient(host=dbconfig.influx_host, port=dbconfig.influx_port)
 client.switch_database(dbconfig.influx_db)
 
 data_dict = {
-    "measurement": "iottest",
+    "measurement": "megatest",
     "tags": {
         "user": "mega_1",
         "serial": "somehash_sssss",
@@ -26,7 +26,7 @@ data_dict = {
 
 @app.route("/")
 def web_print():
-    print('hello')
+    return 'hello'
 
 @app.route("/api/post", methods=['GET', 'POST'])
 def get_post():
@@ -41,4 +41,5 @@ def get_post():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    # app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)

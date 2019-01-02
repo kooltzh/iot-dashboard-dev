@@ -20,7 +20,8 @@ time_offset = 0
 def animate(i):
     global time_offset
     current = 0
-    querys = client.query('SELECT "time", "temperature" FROM "iottest" GROUP BY "user"', epoch='ms')
+    # querys = client.query('SELECT "time", "temperature" FROM "iottest" GROUP BY "user"', epoch='ms')
+    querys = client.query('SELECT "time", "temperature" FROM "megatest" GROUP BY "user"', epoch='ms')
     points = querys.get_points(tags={'user':'mega_1'})
     xs = []
     ys = []
