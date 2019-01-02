@@ -42,6 +42,7 @@ def calling_func():
     #     print ("fail")
     #     exit()
     print ('sent {} to {}'.format(data, URL))
+    print (r.content)
     if count >= sampling - 1:
         count = 0
     else:

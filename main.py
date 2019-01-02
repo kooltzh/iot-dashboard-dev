@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import Response
 
 from influxdb import InfluxDBClient
 import dbconfig
@@ -35,9 +36,13 @@ def get_post():
     if val is not None:
         data_dict['fields']['temperature'] = float(val)
         client.write_points([data_dict])
-        return 'success'
+        return_text = 'success'
+        resp = Response(return_text, status=200, mimetype='text/plain')
+        return resp
     else:
-        return 'fail'
+        return_text = 'fail'
+        resp = Response(return_text, status=-10, mimetype='text/plain')
+        return resp
 
 
 if __name__ == '__main__':

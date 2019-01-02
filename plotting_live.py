@@ -38,7 +38,7 @@ def animate(i):
     ax1.clear()
     current = float((current - time_offset)/1000)
     plt.xlim(current -5, current)
-    plt.ylim(-2,2)
+    plt.ylim(0,100)
     ax1.plot(xs, ys)
 
 ani = animation.FuncAnimation(fig, animate, interval = 100)
