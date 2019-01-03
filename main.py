@@ -1,3 +1,5 @@
+# This is the main flask server script that used to listening for POST then save data into influxdb
+
 from flask import Flask
 from flask import render_template
 from flask import request

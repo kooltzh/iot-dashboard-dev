@@ -1,3 +1,5 @@
+# This script is used to send values of sine wave using POST for testing purposes
+
 import requests
 import random
 
