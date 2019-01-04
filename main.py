@@ -13,6 +13,15 @@ import time
 app = Flask(__name__)
 
 client = InfluxDBClient(host=dbconfig.influx_host, port=dbconfig.influx_port)
+
+#check if database already exist, if not create it
+list_databases = client.get_list_database()
+databases = []
+for database in list_databases:
+    for value in database.values():
+        databases.append(value)
+if dbconfig.influx_db not in databases:
+    client.create_database(dbconfig.influx_db)
 client.switch_database(dbconfig.influx_db)
 
 data_dict = {

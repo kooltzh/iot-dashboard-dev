@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
 
+import numpy as np
+
 import datetime
 
 client = InfluxDBClient(host=dbconfig.influx_host, port=dbconfig.influx_port)
@@ -37,8 +39,9 @@ def animate(i):
         time_offset = 0
     ax1.clear()
     current = float((current - time_offset)/1000)
+
     plt.xlim(current -5, current)
-    plt.ylim(0,100)
+    # plt.ylim(0,100)
     ax1.plot(xs, ys)
 
 ani = animation.FuncAnimation(fig, animate, interval = 100)
