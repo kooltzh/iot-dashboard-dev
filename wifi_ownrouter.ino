@@ -58,8 +58,8 @@ void loop() {
 //      para[j][i-(j*4)] = dString(maindata,i);  
 //    }
     commaindex = maindata.indexOf(",");   
-    temperature = "maindata="+maindata.substring(0,commaindex);
-    humidity = maindata.substring(commaindex+1,11); 
+    temperature = "temperature="+maindata.substring(0,commaindex);
+    humidity = "humidity="+maindata.substring(commaindex+1,11); 
     //Serial.println(para[0]);
     //Serial.println(commaindex);
     Serial.println(temperature);
@@ -78,10 +78,24 @@ void loop() {
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
     //int httpCode = http.GET();
     int httpCode = http.POST(temperature);
+    //int httpCode1 = http.POST(humidity);
     String payload = http.getString();
 
     Serial.println(httpCode);
     Serial.println(payload);
+
+    http.end();
+
+    http.begin("http://192.168.0.102:5000/api/hmd");
+    //http.addHeader("Content-Type", "text/plain");
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+    //int httpCode = http.GET();
+    //int httpCode = http.POST(temperature);
+    int httpCode1 = http.POST(humidity);
+    String payload_hmd = http.getString();
+
+    Serial.println(httpCode1);
+    Serial.println(payload_hmd);
 
     http.end();
     }
