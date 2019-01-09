@@ -15,6 +15,7 @@ client.switch_database(dbconfig.influx_db)
 style.use('fivethirtyeight')
 
 fig = plt.figure()
+fig.canvas.set_window_title('Ambient Temperature')
 ax1 = fig.add_subplot(1,1,1)
 
 time_offset = 0
@@ -40,7 +41,7 @@ def animate(i):
     ax1.clear()
     current = float((current - time_offset)/1000)
 
-    plt.xlim(current -5, current)
+    plt.xlim(current - 60, current)
     # plt.ylim(0,100)
     ax1.plot(xs, ys)
 
