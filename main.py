@@ -9,35 +9,10 @@ from flask import Response
 from influxdb import InfluxDBClient
 import dbconfig
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-from dash.dependencies import Input, Output, State, Event
-import plotly.plotly as py
-from plotly.graph_objs import *
-from scipy.stats import rayleigh
-from flask import Flask
-import numpy as np
-import pandas as pd
-import os
-import datetime as dt
 
-external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
-                "https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i",
-                "https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i"]
-
-
-import time
-
-#app = Flask(__name__)
-
-app = dash.Dash(
-    'streaming-wind-app',
-    external_stylesheets=external_css
-)
+app = Flask(__name__)
 
 client = InfluxDBClient(host=dbconfig.influx_host, port=dbconfig.influx_port)
-
 
 
 #check if database already exist, if not create it
@@ -69,11 +44,10 @@ def web_print():
 
 @app.route("/api/post", methods=['GET', 'POST'])
 def get_post():
+    raw_data = request.get_data().decode('utf8')
     val_tem = request.form.get('temperature')
-    val_hmd = request.form.get('humidity')
-    print ("POST received temperature {}".format(val_tem))
-    print ("POST received humidity {}".format(val_hmd))
-
+    print("POST received raw \"{}\"".format(raw_data))
+    print("POST received temperature {}".format(val_tem))
     if val_tem is not None:
         data_dict['fields']['temperature'] = float(val_tem)
        # data_dict['fields']['humidity'] = float(val_hmd)
@@ -111,7 +85,9 @@ def get_post():
 
 @app.route("/api/hmd", methods=['GET', 'POST'])
 def get_hmd():
+    raw_data = request.get_data().decode('utf8')
     val_hmd = request.form.get('humidity')
+    print("POST received raw \"{}\"".format(raw_data))
     print ("POST received humidity {}".format(val_hmd))
 
     if val_hmd is not None:

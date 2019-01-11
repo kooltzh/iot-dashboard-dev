@@ -156,7 +156,7 @@ def live_plot(interval, period, mean, save_plotting, interest):
 
     for point in points:
         # if time_offset == 0:
-        #     time_offset = int(point['time'])
+        #     time_offset = int(point['time'])` 
         # current = int(point['time'])
         # xs.append((current - time_offset)/1000)
 
@@ -198,4 +198,5 @@ def live_plot(interval, period, mean, save_plotting, interest):
     return Figure(data=trace, layout=layout)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    # app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', port='8050')
