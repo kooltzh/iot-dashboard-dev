@@ -34,7 +34,10 @@ data_dict = {
     },
     "fields": {
         "temperature": "",
-        "humidity": ""
+        "humidity": "",
+        "pir":"",
+        "soundDB":"",
+        "co":""
     }
 }
 
@@ -109,6 +112,62 @@ def get_hmd():
         resp = Response(return_text, status=-10, mimetype='text/plain')
         return resp
 
+@app.route("/api/pir", methods=['GET', 'POST'])
+def get_pir():
+    raw_data = request.get_data().decode('utf8')
+    val_pir = request.form.get('pir')
+    print("POST received raw \"{}\"".format(raw_data))
+    print ("POST received pir_status {}".format(val_pir))
+
+    if val_pir is not None:
+        data_dict['fields']['pir'] = float(val_pir)
+        client.write_points([data_dict])
+        return_text = 'success'
+        resp = Response(return_text, status=200, mimetype='text/plain')
+        return resp
+
+    else:
+        return_text = 'fail'
+        resp = Response(return_text, status=-10, mimetype='text/plain')
+        return resp
+
+@app.route("/api/sound", methods=['GET', 'POST'])
+def get_sound():
+    raw_data = request.get_data().decode('utf8')
+    val_sound = request.form.get('soundDB')
+    print("POST received raw \"{}\"".format(raw_data))
+    print ("POST received soundDB {}".format(val_sound))
+
+    if val_sound is not None:
+        data_dict['fields']['soundDB'] = float(val_sound)
+        client.write_points([data_dict])
+        return_text = 'success'
+        resp = Response(return_text, status=200, mimetype='text/plain')
+        return resp
+
+    else:
+        return_text = 'fail'
+        resp = Response(return_text, status=-10, mimetype='text/plain')
+        return resp
+        
+@app.route("/api/co", methods=['GET', 'POST'])
+def get_co():
+    raw_data = request.get_data().decode('utf8')
+    val_co = request.form.get('co')
+    print("POST received raw \"{}\"".format(raw_data))
+    print ("POST received co {}".format(val_co))
+
+    if val_co is not None:
+        data_dict['fields']['co'] = float(val_co)
+        client.write_points([data_dict])
+        return_text = 'success'
+        resp = Response(return_text, status=200, mimetype='text/plain')
+        return resp
+
+    else:
+        return_text = 'fail'
+        resp = Response(return_text, status=-10, mimetype='text/plain')
+        return resp        
 
 if __name__ == '__main__':
     # app.run(port=5000, debug=True)
