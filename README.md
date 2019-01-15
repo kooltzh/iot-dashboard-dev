@@ -18,6 +18,9 @@ For live plotting of graph,
 
 ## Installation
 
+* Install influxdb by [link](https://portal.influxdata.com/downloads/)
+* Run the influxdb service by typing `influxd`
+* Make sure that influxdb is running by entering the influx CLI by typing `influx`
 * Clone or download this repository
 * Update the dbconfig.py using your own influxdb username, password, database
 * run `python main.py`
