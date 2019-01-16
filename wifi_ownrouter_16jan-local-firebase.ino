@@ -8,11 +8,12 @@
 #define FIREBASE_HOST "spirit-iot-test.firebaseio.com"
 #define FIREBASE_AUTH "wdNQYOzKXPZqIFcld8etSOALxhSvaOKNQUtV5RR2"
 
-#define WIFI_SSID "amusemefirst"
-#define WIFI_PASSWORD "?3502679?"
+//#define WIFI_SSID "amusemefirst"
+//#define WIFI_PASSWORD "?3502679?"
 
 const char* ssid     = "amusemefirst";         // The SSID (name) of the Wi-Fi network you want to connect to
 const char* password = "?3502679?";     // The password of the Wi-Fi network
+
 int j = 0;
 void setup() {
   Serial.begin(115200);         // Start the Serial communication to send messages to the computer
@@ -137,7 +138,7 @@ void loop() {
             // delay(500);             
             return;
         }else{
-            Serial.print("Firebase Pushed /downtown success");
+            Serial.print("Firebase Pushed /downtown success:");
             Serial.println(name);
             // delay(500); 
         }
@@ -146,5 +147,5 @@ void loop() {
     else {
       Serial.println("Error in WiFi connection...");
     }
-    delay(1000);
+    delay(100);
 }
