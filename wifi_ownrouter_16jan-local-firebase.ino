@@ -128,16 +128,16 @@ void loop() {
   root["soundDB"] = sFB; 
   root["co"] = cFB;  
   // append a new value to /logDHT
-  String name = Firebase.push("/sensor", root);
+  String name = Firebase.push("/downtown", root);
 
 
         if (Firebase.failed()) {
-            Serial.print("Firebase Pushing /sensor failed:");
+            Serial.print("Firebase Pushing /downtown failed:");
             Serial.println(Firebase.error()); 
             // delay(500);             
             return;
         }else{
-            Serial.print("Firebase Pushed /sensor/dht ");
+            Serial.print("Firebase Pushed /downtown success");
             Serial.println(name);
             // delay(500); 
         }
